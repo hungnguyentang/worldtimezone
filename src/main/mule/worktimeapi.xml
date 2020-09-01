@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:request-config name="HTTP_Request_configuration1" doc:name="HTTP Request configuration" doc:id="ae40cc9c-3b0d-451b-ae45-e1b648b4d9bb" basePath="/api/timezone" >
+		<http:request-connection host="worldtimeapi.org" />
+	</http:request-config>
+	<flow name="worktimeapiFlow" doc:id="0576d7ed-627e-482c-9e1d-c8db25e8a8d5" >
+		<http:listener doc:name="Listener" doc:id="9526a554-7a4a-4a13-acc3-ed898f10cd9f" config-ref="HTTP_Listener_config" path="/worktimeapi"/>
+		<http:request method="GET" doc:name="Request" doc:id="08b9c886-1f6f-4192-91d4-2474357ce290" config-ref="HTTP_Request_configuration1" path="/{region}/{city}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"region" : attributes.uriParams.region,
+	"city" : attributes.uriParams.city
+}]]]></http:uri-params>
+		</http:request>
+	</flow>
+</mule>
