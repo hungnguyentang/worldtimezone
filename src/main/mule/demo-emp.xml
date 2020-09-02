@@ -12,6 +12,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	</http:request-config>
 	<flow name="demo-empFlow" doc:id="ffbf5715-b1e2-49f9-a6a8-db1e10507f0c" >
 		<http:listener doc:name="Listener" doc:id="bf52676e-9985-4b5c-a667-9e962f65018b" config-ref="HTTP_Listener_config" path="/demo-emp"/>
+		<logger level="INFO" doc:name="Logger" doc:id="55ecddc2-d30e-4b01-afe7-cfda6fc5e1f6" message="=== #[payload]"/>
 		<http:request method="GET" doc:name="Request" doc:id="30c5265e-f32e-4c97-a1af-079f1677f941" config-ref="HTTP_Request_configuration" path="/api/v1/employee/1"/>
 	</flow>
 </mule>
