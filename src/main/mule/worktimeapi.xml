@@ -8,7 +8,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<http:request-connection host="worldtimeapi.org" />
 	</http:request-config>
 	<flow name="worktimeapiFlow" doc:id="0576d7ed-627e-482c-9e1d-c8db25e8a8d5" >
-		<http:listener doc:name="Listener" doc:id="9526a554-7a4a-4a13-acc3-ed898f10cd9f" config-ref="HTTP_Listener_config" path="/worldtimezone"/>
+		<http:listener doc:name="Listener" doc:id="9526a554-7a4a-4a13-acc3-ed898f10cd9f" config-ref="HTTP_Listener_config" path="/worldtimezone/{region}/{city}"/>
 		<logger level="INFO" doc:name="Logger" doc:id="e9154c78-e094-4aa5-b8bc-1643625c97ac" message="=== #[payload]"/>
 		<http:request method="GET" doc:name="Request" doc:id="08b9c886-1f6f-4192-91d4-2474357ce290" config-ref="HTTP_Request_configuration1" path="/{region}/{city}">
 			<http:uri-params ><![CDATA[#[output application/java
